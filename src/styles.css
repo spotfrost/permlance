@@ -1,0 +1,23 @@
+.red{
+  color: red;
+}
+.form-control {
+  border: 1px solid #e1e1e1 !important;
+  height: 40px !important;
+
+}
+.panel.card.panel-default {
+  border-bottom: 1px solid #dcdcdc !important;
+  border-left: 0 none;
+  border-right: 0 none;
+  border-top: 0 none;
+  box-shadow: 0 1px 2px 1px rgba(189, 198, 207, 0.41);
+  float: left;
+  margin-bottom: 11px;
+  margin-top: 11px;
+  width: 100%;
+}
+
+.leftSide .panel-heading.card-header {
+  background-color: #fff !important;
+}

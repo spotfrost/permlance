@@ -1,0 +1,52 @@
+<div class="container">
+<div class="row jobdetails-outer-row">
+  <div *ngIf="showloading==true" class="loadingAnimateDiv"><img class="loadingAnimateImg" src="/assets/images/loading.gif"></div>
+  <div class="jobDetailsOuter" *ngIf="showloading==false">
+<div class="col-md-8">
+
+
+  <div class="backtoJobs">
+    <a class="backtoJobsLink" [routerLink]="['/']" routerLinkActive="active"><i class="glyphicon glyphicon-arrow-left"></i> All Jobs</a>
+  </div>
+
+
+
+  <h3 class="jobTitleh3">{{jobDetails.jobTitle}}</h3>
+      <ul class="jobInfo">
+            <li><a href="" class="job-type {{jobDetails.typeName}}">{{jobDetails.typeName}}</a></li>
+            <li class="ss-location" id="location">
+            <i class="glyphicon glyphicon-map-marker"></i><a href="#map">{{jobDetails.location}}
+            </a>
+            </li>
+            <li class="ss-buildings"><fa name="building"></fa>{{jobDetails.companyTypeName}}</li>
+            <li class="ss-compensation"><fa name="money"></fa>{{jobDetails.compensationName}}</li>
+      </ul>
+      <div class="postedOn">
+        <i class="glyphicon glyphicon-time"></i> Posted {{jobDetails.createdAt | date:"yMMMMd"}}
+      </div>
+      <div class="jobDescription" [innerHTML]="jobDetails.description"></div>
+      <div class="applyButton">
+          <a class="btn btn-info apply-to-job-button"
+           [routerLink]="['/apply',jobDetails.id,jobname]" routerLinkActive="active">Apply to this job</a>
+      </div>
+</div>
+<div class="col-md-4">
+
+  <div class="jobLogo">
+    <img src="{{jobDetails.profilePhoto}}" (error)="jobDetails.profilePhoto=defaultImgSrc">
+    <h5 class="companyNameh5">{{jobDetails.companyName}}</h5>
+    <span class="elevatorPitchspan" [innerHTML]="jobDetails.elevatorPitch"></span>
+    <div class="socialicons">
+      <a target="_blank" [href]="jobDetails.website"><fa class="icon2x" name="globe"></fa></a>
+      <a target="_blank"  [href]='"http://twitter.com/"+jobDetails.twitter'><fa class="icon2x" name="twitter"></fa></a>
+    </div>
+  </div>
+
+  <div class="applyButton">
+      <a class="btn btn-info small-apply-to-job-button" [routerLink]="['/apply',jobDetails.id,jobname]" routerLinkActive="active">Apply to this job</a>
+  </div>
+</div>
+
+</div>
+
+</div>

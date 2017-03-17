@@ -1,0 +1,21 @@
+.applicantsdetils {
+  background: #f0f0f0 none repeat scroll 0 0;
+  float: left;
+  padding: 20px;
+  width: 100%;
+}
+.applicantrow {
+  padding: 0 24px;
+}
+.applicantlabel {
+  color: #222;
+  font-size: 17px;
+  font-weight: 300;
+  line-height: 36px;
+  width: 38%;
+}
+.loadingAnimateDiv {
+  left: 44%;
+  position: absolute;
+  top: 23%;
+}

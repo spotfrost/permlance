@@ -1,0 +1,15 @@
+<div class="viewjobscontainer">
+<div class="col-md-3">
+  <ul class="navigateDashUl">
+  <li class="dashboardli btn btn-white-fill navbar-btn"><a class="navlink" [routerLink]="['/dashboard/viewjobs']">View Jobs</a></li>
+  <li class="dashboardli btn btn-white-fill navbar-btn"><a class="navlink" [routerLink]="['/dashboard/editprofile']">Edit Profile</a></li>
+  <li class="dashboardli btn btn-white-fill navbar-btn"><a class="navlink" [routerLink]="['/dashboard/postjob']">Post Job</a></li>
+  <li *ngIf="userRole==1" class="dashboardli btn btn-white-fill navbar-btn"><a class="navlink" [routerLink]="['/dashboard/manage-users']">Manage Users</a></li>
+  <li class="dashboardli btn btn-white-fill navbar-btn"><a class="navlink" [routerLink]="['/logout']">Logout</a></li>
+
+  </ul>
+</div>
+<div class="col-md-9">
+  Welcome to your Job Portal Dashboard.
+</div>
+</div>

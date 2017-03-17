@@ -1,0 +1,46 @@
+<div class="viewjobscontainer">
+<div class="col-md-3">
+  <ul class="navigateDashUl">
+  <li class="dashboardli btn btn-white-fill navbar-btn"><a class="navlink" [routerLink]="['/dashboard/viewjobs']">View Jobs</a></li>
+  <li class="dashboardli btn btn-white-fill navbar-btn"><a class="navlink" [routerLink]="['/dashboard/editprofile']">Edit Profile</a></li>
+  <li class="dashboardli btn btn-white-fill navbar-btn"><a class="navlink" [routerLink]="['/dashboard/postjob']">Post Job</a></li>
+  <li *ngIf="userRole==1" class="dashboardli btn btn-white-fill navbar-btn"><a class="navlink" [routerLink]="['/dashboard/manage-users']">Manage Users</a></li>
+  <li class="dashboardli btn btn-white-fill navbar-btn"><a class="navlink" [routerLink]="['/logout']">Logout</a></li>
+
+  </ul>
+
+</div>
+<div class="col-md-9">
+
+  <div class="mylistingsouter">
+    <div *ngIf="showloading==true" class="loadingAnimateDiv"><img class="loadingAnimateImg" src="/assets/images/loading.gif"></div>
+  <h3 class="viewjobsh3 grey">All Users</h3>
+  <div class="response-from-api">
+    <p class="red">{{error | returnerrorfromjson}}</p>
+  </div>
+
+  <ul [ngClass]="{'user-ull': true}">
+  <li [ngClass]="{'user-li': true}" *ngFor="let item of users  | paginate: { itemsPerPage: 10, currentPage: p };let i=index" (mouseover)="highlightUser(i,$event)" [class.userhightlighted]="i==selectedIndex">
+
+<div class="leftSideUser">
+<img class="company-avatar" src="{{item.profilePhoto}}" (error)="item.profilePhoto=defaultImgSrc" >
+</div>
+
+<div class="rightSideUser">
+  <div class="details">
+  <div class="userDetail"><label class="userLabel">First Name</label><span class="userDetail"> {{item.firstName}}</span></div>
+  <div class="userDetail"><label class="userLabel">Last Name</label><span class="userDetail"> {{item.lastName}}</span></div>
+  <div class="userDetail"><label class="userLabel">Email</label><span class="userDetail"> {{item.email}}</span></div>
+  </div>
+  <div class="viewDetails">
+    <a class="viewapplications" [routerLink]="['/dashboard/manage-users',item.id]" routerLinkActive="active">View Details</a>
+    <a class="viewapplications" [routerLink]="['/dashboard/manage-users/view-jobs',item.id]" routerLinkActive="active">View Jobs</a>
+  </div>
+</div>
+
+  </li>
+  </ul>
+  <pagination-controls (pageChange)="p = $event"></pagination-controls>
+</div>
+  </div>
+  </div>

@@ -1,0 +1,155 @@
+<div class="viewjobscontainer">
+<div class="col-md-3">
+  <ul class="navigateDashUl">
+  <li class="dashboardli btn btn-white-fill navbar-btn"><a class="navlink" [routerLink]="['/dashboard/viewjobs']">View Jobs</a></li>
+  <li class="dashboardli btn btn-white-fill navbar-btn"><a class="navlink" [routerLink]="['/dashboard/editprofile']">Edit Profile</a></li>
+  <li class="dashboardli btn btn-white-fill navbar-btn"><a class="navlink" [routerLink]="['/dashboard/postjob']">Post Job</a></li>
+  <li *ngIf="userRole==1" class="dashboardli btn btn-white-fill navbar-btn"><a class="navlink" [routerLink]="['/dashboard/manage-users']">Manage Users</a></li>
+  <li class="dashboardli btn btn-white-fill navbar-btn"><a class="navlink" [routerLink]="['/logout']">Logout</a></li>
+
+  </ul>
+
+</div>
+<div class="col-md-9">
+
+  <div class="postJobOuter">
+
+  <div class="response-from-api">
+    <span style="color:green">{{result}}</span>
+    <span style="color:red"> {{error | returnerrorfromjson}}</span>
+  </div>
+  <h3 class="editprofileh3 grey">New Job</h3>
+  <form novalidate class="form-horizontal" (ngSubmit)="saveJobFromDashboard(f,$event)" #f="ngForm">
+          <div class="row1">
+          <div class="control-group">
+            <label class='leftLabel' for="jobType">Job Type</label>
+            <div class="righttoLabel">
+              <div class="job-type-outer"><input type="radio" name="jobType" [(ngModel)]="formData.type" [value]="1" required  #jobref="ngModel"><label><span style="color:#e98210">Free</span>
+              </label>
+                <!-- <br><span class="belowLabel">Salaried position, typically 40 hours a week</span> -->
+              </div>
+
+              <div class="job-type-outer"><input type="radio" name="jobType" [(ngModel)]="formData.type" [value]="2" required ><label><span style="color:#fc00c1">Paid</span> $100</label>
+              </div>
+
+              <p class="red" [hidden]="jobref.valid || (jobref.untouched && !f.submitted)" *ngIf="jobref.errors?.required">Job Type is required</p>
+            </div>
+          </div>
+
+          <div class="control-group">
+            <label class='leftLabel' for="skills">Skills</label>
+            <div class="righttoLabel">
+              <ng-select id="skillsselect" name="skills"
+                [options]="OPTIONS_SKILLS"
+                [(ngModel)]="formData.skills"
+                placeholder="Select skills"
+                #skill="ngModel" required
+                >
+              </ng-select>
+            <p class="red" [hidden]="skill.valid || (skill.untouched && !f.submitted)" *ngIf="skill.errors?.required">Skill is required</p>
+          </div>
+          </div>
+
+          <div class="control-group">
+            <label class='leftLabel' for="level">Level</label>
+            <div class="righttoLabel">
+              <ng-select  id="levelselect" name="level"
+                [options]="OPTIONS_LEVELS"
+                [(ngModel)]="formData.level"
+                placeholder="Select Level"
+                #level="ngModel" required
+                >
+              </ng-select>
+              <p class="red" [hidden]="level.valid || (level.untouched && !f.submitted)" *ngIf="level.errors?.required">Level is required</p>
+          </div>
+          </div>
+
+          <div class="control-group">
+            <label class='leftLabel' for="compensation">Compensation</label>
+            <div class="righttoLabel">
+              <ng-select id="compensationselect" name="compensation"
+                [options]="OPTIONS_COMPENSATIONS"
+                [(ngModel)]="formData.compensation"
+                placeholder="Select Compensation"
+                #compensation="ngModel" required
+                >
+              </ng-select>
+              <p class="red" [hidden]="compensation.valid || (compensation.untouched && !f.submitted)" *ngIf="compensation.errors?.required">Compensation is required</p>
+            </div>
+          </div>
+
+          <div class="control-group">
+            <label class='leftLabel' for="companyType">Company type</label>
+            <div class="righttoLabel">
+              <ng-select  id="companytypeselect" name="companyType"
+                [options]="OPTIONS_COMPANYTYPES"
+                [(ngModel)]="formData.companyType"
+                placeholder="Select Company Type"
+                #companyType="ngModel" required
+                >
+              </ng-select>
+            <p class="red" [hidden]="companyType.valid || (companyType.untouched && !f.submitted)" *ngIf="companyType.errors?.required">Company Type is required</p>
+            </div>
+          </div>
+
+          <div class="control-group">
+            <label class='leftLabel' for="jobTitle">Job Title</label>
+            <div class="righttoLabel">
+            <input type="text" class="form-control" id="jobTitle" [(ngModel)]="formData.jobTitle" name="jobTitle" required  #jobtitle="ngModel"  >
+            <p class="red" [hidden]="jobtitle.valid || (jobtitle.untouched && !f.submitted)" *ngIf="jobtitle.errors?.required">Job Title is required</p>
+          </div>
+          </div>
+
+          <div class="control-group">
+            <label class='leftLabel' for="location">Location</label>
+            <div class="righttoLabel">
+            <input type="text" class="form-control" id="location" [(ngModel)]="formData.location" name="location" #location="ngModel" required>
+            <p class="red" [hidden]="location.valid || (location.untouched && !f.submitted)" *ngIf="location.errors?.required">Location is required</p>
+          </div>
+          </div>
+
+          <div class="control-group">
+            <label class='leftLabel' for="description">Description</label>
+            <div class="righttoLabel">
+              <ckeditor [config]="{removeButtons: 'Cut,Copy,Paste,Undo,Redo,Anchor',removePlugins : 'elementspath,save,font',removeDialogTabs : 'flash:advanced;image:Link'}" [(ngModel)]="formData.description" name="description"  #desc="ngModel" required>
+
+              </ckeditor>
+              <p class="red" [hidden]="desc.valid || (desc.untouched && !f.submitted)" *ngIf="desc.errors?.required">Description is required</p>
+          </div>
+          </div>
+
+          <div class="control-group">
+            <label class='leftLabel' for="perks">Perks</label>
+            <div class="righttoLabel">
+            <input type="text" class="form-control" id="perks" [(ngModel)]="formData.perks" name="perks"  #perks="ngModel">
+
+          </div>
+          </div>
+
+          <div class="control-group">
+            <label class='leftLabel' for="contactEmail">Contact Email</label>
+            <div class="righttoLabel">
+            <input type="text" class="form-control" id="contactEmail" [(ngModel)]="formData.contactEmail" name="contactEmail" email #cemail="ngModel" >
+              <p class="red" [hidden]="cemail.valid || (cemail.untouched && !f.submitted)" *ngIf="cemail.errors?.email">Not an email address</p>
+
+          </div>
+          </div>
+
+          <div class="control-group">
+            <label class='leftLabel' for="terms">Terms</label>
+            <div class="righttoLabel">
+            <input name="terms" [(ngModel)]="formData.terms" type="checkbox" value="accept" #cb="ngModel" required>I understand that my listing may be removed if it is for a position that involves adult content, an illegitimate work opportunity, an incorrect job type (i.e. freelance when it should be listed as full-time), or contains inappropriate language. <strong>If removed within 7 days after posting, a refund will be issued.</strong>
+            <p class="red" [hidden]="cb.valid || (cb.untouched && !f.submitted)" *ngIf="cb.errors?.required">Please accept terms.</p>
+          </div>
+          </div>
+
+          <input type="hidden" name="createdBy" [value]="userId">
+
+          <div class="pull-right">
+              <div *ngIf="showloading==true" class="loadingAnimateDiv"><img class="loadingAnimateImg" src="/assets/images/loadingSmall.gif"></div>
+            <button  [disabled]="showloading==true" style="margin:20px 0;" class="btn btn-success">Confirm and Register</button></div>
+      </div>
+  </form>
+</div>
+</div>
+</div>

@@ -1,0 +1,431 @@
+<div class="containerCC">
+<script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.1/underscore-min.js"></script>
+<div class="col-md-8 jobCreateDiv">
+<h2 class="createJobListingh2">Create Your Job Listing</h2>
+<div class="content">
+
+<div class="response-from-api">
+  <span style="color:green">{{result}}</span>
+  <span style="color:red"> {{error | returnerrorfromjson}}</span>
+</div>
+
+
+<form novalidate class="form-horizontal" (ngSubmit)="saveJob(f)" #f="ngForm">
+    <div id="step1" [hidden]="showDiv!=1">
+      <!-- <h2>Step 1</h2> -->
+        <div class="row1">
+        <div class="control-group">
+          <label class='leftLabel' for="jobType">Job Type</label>
+          <div class="righttoLabel">
+            <div class="job-type-outer"><input type="radio" name="jobType" [(ngModel)]="formData.type" id="1" [value]="1" required  #jobref="ngModel"><label><span style="color:#e98210">Free</span></label>
+            </div>
+
+            <div class="job-type-outer"><input type="radio" name="jobType" [(ngModel)]="formData.type" id="2" [value]="2" required ><label><span style="color:#fc00c1">Paid</span> $100 </label>
+            </div>
+
+            <p class="red" [hidden]="jobref.valid || (jobref.untouched && !f.submitted)" *ngIf="jobref.errors?.required">Job Type is required</p>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <label class='leftLabel' for="skills">Skills</label>
+          <div class="righttoLabel">
+            <ng-select id="skillsselect" name="skills"
+              [options]="OPTIONS_SKILLS"
+              [(ngModel)]="formData.skills"
+              placeholder="Select skills"
+              #skill="ngModel" required
+              >
+            </ng-select>
+          <p class="red" [hidden]="skill.valid || (skill.untouched && !f.submitted)" *ngIf="skill.errors?.required">Skill is required</p>
+        </div>
+        </div>
+
+        <div class="control-group">
+          <label class='leftLabel' for="level">Level</label>
+          <div class="righttoLabel">
+            <ng-select  id="levelselect" name="level"
+              [options]="OPTIONS_LEVELS"
+              [(ngModel)]="formData.level"
+              placeholder="Select Level"
+              #level="ngModel" required
+              >
+            </ng-select>
+            <p class="red" [hidden]="level.valid || (level.untouched && !f.submitted)" *ngIf="level.errors?.required">Level is required</p>
+        </div>
+        </div>
+
+        <div class="control-group">
+          <label class='leftLabel' for="compensation">Compensation</label>
+          <div class="righttoLabel">
+            <ng-select id="compensationselect" name="compensation"
+              [options]="OPTIONS_COMPENSATIONS"
+              [(ngModel)]="formData.compensation"
+              placeholder="Select Compensation"
+              #compensation="ngModel" required
+              >
+            </ng-select>
+            <p class="red" [hidden]="compensation.valid || (compensation.untouched && !f.submitted)" *ngIf="compensation.errors?.required">Compensation is required</p>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <label class='leftLabel' for="jobTitle">Job Title</label>
+          <div class="righttoLabel">
+          <input type="text" class="form-control" id="jobTitle" [(ngModel)]="formData.jobTitle" name="jobTitle" required  #jobtitle="ngModel"  >
+          <p class="red" [hidden]="jobtitle.valid || (jobtitle.untouched && !f.submitted)" *ngIf="jobtitle.errors?.required">Job Title is required</p>
+        </div>
+        </div>
+
+        <div class="control-group">
+          <label class='leftLabel' for="location">Location</label>
+          <div class="righttoLabel">
+          <input type="text" class="form-control" id="location" [(ngModel)]="formData.location" name="location" #location="ngModel" required>
+          <p class="red" [hidden]="location.valid || (location.untouched && !f.submitted)" *ngIf="location.errors?.required">Location is required</p>
+        </div>
+        </div>
+
+        <div class="control-group">
+          <label class='leftLabel' for="description">Description</label>
+          <div class="righttoLabel">
+
+          <ckeditor [config]="{removeButtons: 'Cut,Copy,Paste,Undo,Redo,Anchor',removePlugins : 'elementspath,save,font',removeDialogTabs : 'flash:advanced;image:Link'}" [(ngModel)]="formData.description" debounce="500" name="description"  #desc="ngModel" required>
+
+          </ckeditor>
+          <p class="red" [hidden]="desc.valid || (desc.untouched && !f.submitted)" *ngIf="desc.errors?.required">Description is required</p>
+        </div>
+        </div>
+
+        <div class="control-group">
+          <label class='leftLabel' for="perks">Perks</label>
+          <div class="righttoLabel">
+          <input type="text" class="form-control" id="perks" [(ngModel)]="formData.perks" name="perks"  #perks="ngModel">
+
+        </div>
+        </div>
+
+        <h2 class='h2C'>Company Information</h2>
+        <div class="control-group">
+          <label class='leftLabel' for="companyType">Company type</label>
+          <div class="righttoLabel">
+            <ng-select  id="companytypeselect" name="companyType"
+              [options]="OPTIONS_COMPANYTYPES"
+              [(ngModel)]="formData.companyType"
+              placeholder="Select Company Type"
+              #companyType="ngModel" required
+              >
+            </ng-select>
+          <p class="red" [hidden]="companyType.valid || (companyType.untouched && !f.submitted)" *ngIf="companyType.errors?.required">Company Type is required</p>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <label class='leftLabel' for="companyName">Company Name</label>
+          <div class="righttoLabel">
+          <input type="text" class="form-control" id="companyName" [(ngModel)]="formData.companyName" name="companyName" #companyName="ngModel" required>
+          <p class="red" [hidden]="companyName.valid || (companyName.untouched && !f.submitted)" *ngIf="companyName.errors?.required">Company Name is required</p>
+        </div>
+        </div>
+
+        <div class="control-group">
+          <label class='leftLabel' for="companyUrl">Company Url</label>
+          <div class="righttoLabel">
+          <input type="text" class="form-control" id="companyUrl" [(ngModel)]="formData.companyUrl" name="companyUrl" url #companyUrl="ngModel" required>
+          <p class="red" [hidden]="companyUrl.valid || (companyUrl.untouched && !f.submitted)" *ngIf="companyUrl.errors?.required">Company Url is required</p>
+          <p class="red" [hidden]="companyUrl.valid || (companyUrl.untouched && !f.submitted)" *ngIf="companyUrl.errors?.url">Please enter Url</p>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <label class='leftLabel' for="elevatorPitch">Elevator Pitch</label>
+          <div class="righttoLabel">
+
+
+            <ckeditor [config]="{removeButtons: 'Cut,Copy,Paste,Undo,Redo,Anchor',removePlugins : 'elementspath,save,font',removeDialogTabs : 'flash:advanced;image:Link'}" [(ngModel)]="formData.elevatorPitch" debounce="500" name="elevatorPitch"  #elevator="ngModel" required>
+
+            </ckeditor>
+            <p class="red" [hidden]="elevator.valid || (elevator.untouched && !f.submitted)" *ngIf="elevator.errors?.required">Elevator pitch is required</p>
+        </div>
+        </div>
+
+        <div class="control-group">
+          <label class='leftLabel' for="twitter">Twitter</label>
+          <div class="righttoLabel">
+          <input type="text" class="form-control" id="twitter" [(ngModel)]="formData.twitter" name="twitter">
+          </div>
+        </div>
+
+        <div class="control-group">
+          <label class='leftLabel' for="terms">Terms</label>
+          <div class="righttoLabel">
+          <input name="terms" [(ngModel)]="formData.terms" type="checkbox" value="accept" #cb="ngModel" required>I understand that my listing may be removed if it is for a position that involves adult content, an illegitimate work opportunity, an incorrect job type (i.e. freelance when it should be listed as full-time), or contains inappropriate language. <strong>If removed within 7 days after posting, a refund will be issued.</strong>
+          <p class="red" [hidden]="cb.valid || (cb.untouched && !f.submitted)" *ngIf="cb.errors?.required">Please accept terms.</p>
+        </div>
+        </div>
+
+        <div class="control-group">
+            <label class='leftLabel' for="terms">Profile Photo (optional)</label>
+            <div class="righttoLabel">
+              <input type="file" name="image"  (change)="handleInputChange($event)">
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label class='leftLabel' for="terms">Hero Photo (optional)</label>
+            <div class="righttoLabel">
+              <input type="file" name="image"  (change)="handleInputChangeHeroPhoto($event)">
+            </div>
+        </div>
+
+    </div>
+
+    </div>
+
+        <div id="step2" [hidden]="showDiv!=2">
+
+        <div class="row1">
+          <div class="control-group">
+            <label class='leftLabel' for="firstName">First Name</label>
+            <div class="righttoLabel">
+            <input type="text" class="form-control" id="firstName" [(ngModel)]="formData.firstName" name="firstName" #fn="ngModel" required>
+            <p class="red" [hidden]="fn.valid || (fn.untouched && !f.submitted)" *ngIf="fn.errors?.required">First name is required.</p>
+          </div>
+          </div>
+
+          <div class="control-group">
+            <label class='leftLabel' for="lastName">Last Name</label>
+            <div class="righttoLabel">
+            <input type="text" class="form-control" id="lastName"  [(ngModel)]="formData.lastName" name="lastName" #ln="ngModel" required>
+            <p class="red" [hidden]="ln.valid || (ln.untouched && !f.submitted)" *ngIf="ln.errors?.required">Last name is required.</p>
+          </div>
+          </div>
+
+          <div class="control-group">
+            <label class='leftLabel' for="email">Email</label>
+            <div class="righttoLabel">
+            <input type="text" class="form-control" id="email" [(ngModel)]="formData.email" name="email" #email="ngModel" required email>
+              <p class="red" [hidden]="email.valid || (email.untouched && !f.submitted)" *ngIf="email.errors?.required">Email is required.</p>
+              <p class="red" [hidden]="email.valid || (email.untouched && !f.submitted)" *ngIf="email.errors?.email">Not an Email address.</p>
+          </div>
+          </div>
+
+          <div class="control-group">
+            <label class='leftLabel' for="addressLine1">Address Line 1</label>
+            <div class="righttoLabel">
+            <input type="text" class="form-control" id="addressLine1" [(ngModel)]="formData.addressLine1" name="addressLine1" #addrline1="ngModel" required>
+            <p class="red" [hidden]="addrline1.valid || (addrline1.untouched && !f.submitted)" *ngIf="addrline1.errors?.required">Address is required.</p>
+          </div>
+          </div>
+
+          <div class="control-group">
+            <label class='leftLabel' for="addressLine2">Address Line 2</label>
+            <div class="righttoLabel">
+            <input type="text" class="form-control" id="addressLine2" [(ngModel)]="formData.addressLine2" name="addressLine2">
+          </div>
+          </div>
+
+          <div class="control-group">
+            <label class='leftLabel' for="city">City</label>
+            <div class="righttoLabel">
+            <input type="text" class="form-control" id="city" [(ngModel)]="formData.city" name="city" #city="ngModel" required>
+            <p class="red" [hidden]="city.valid || (city.untouched && !f.submitted)" *ngIf="city.errors?.required">City is required.</p>
+          </div>
+          </div>
+
+          <div class="control-group">
+            <label class='leftLabel' for="state">State</label>
+            <div class="righttoLabel">
+            <input type="text" class="form-control" id="state" [(ngModel)]="formData.state" name="state"  #state="ngModel">
+
+          </div>
+          </div>
+
+          <div class="control-group">
+            <label class='leftLabel' for="zip">Zip</label>
+            <div class="righttoLabel">
+            <input type="text" class="form-control" id="zip" [(ngModel)]="formData.zip" name="zip" #zip="ngModel" required number>
+            <p class="red" [hidden]="zip.valid || (zip.untouched && !f.submitted)" *ngIf="zip.errors?.required">Zip is required.</p>
+            <p class="red" [hidden]="zip.valid || (zip.untouched && !f.submitted)" *ngIf="zip.errors?.number">Enter numbers only.</p>
+          </div>
+          </div>
+
+          <div class="control-group">
+            <label class='leftLabel' for="country">Country</label>
+            <div class="righttoLabel">
+            <input type="text" class="form-control" id="country" [(ngModel)]="formData.country" name="country">
+          </div>
+          </div>
+
+          <div class="control-group">
+            <label class='leftLabel' for="phone">Phone</label>
+            <div class="righttoLabel">
+            <input type="text" class="form-control" id="phone" [(ngModel)]="formData.phone" name="phone" #phone="ngModel" number [maxLength]="10">
+            <p class="red" [hidden]="phone.valid || (phone.untouched && !f.submitted)" *ngIf="phone.errors?.required">Phone is required.</p>
+            <p class="red" [hidden]="phone.valid || (phone.untouched && !f.submitted)" *ngIf="phone.errors?.number">Enter numbers only.</p>
+          </div>
+          </div>
+
+          <div class="control-group">
+            <label class='leftLabel' for="website">Website</label>
+            <div class="righttoLabel">
+            <input type="text" class="form-control" id="website" [(ngModel)]="formData.website" name="website" #website="ngModel" url>
+              <p class="red" [hidden]="website.valid || (website.untouched && !f.submitted)" *ngIf="website.errors?.url">Not a valid Url.</p>
+          </div>
+          </div>
+
+          <div class="control-group">
+            <label class='leftLabel' for="contactEmail">Contact Email</label>
+            <div class="righttoLabel">
+            <input type="text" class="form-control" id="contactEmail" [(ngModel)]="formData.contactEmail" name="contactEmail" email #contactemail="ngModel">
+              <p class="red" [hidden]="contactemail.valid || (contactemail.untouched && !f.submitted)" *ngIf="contactemail.errors?.email">Not a valid email.</p>
+          </div>
+          </div>
+
+          <div class="control-group">
+            <label class='leftLabel' for="password">Password</label>
+            <div class="righttoLabel">
+            <input type="password" class="form-control" id="password"  [(ngModel)]="formData.password" name="password" #password="ngModel" required>
+            <p class="red" [hidden]="password.valid || (password.untouched && !f.submitted)" *ngIf="password.errors?.required">Password is required.</p>
+          </div>
+          </div>
+
+        </div>
+        </div>
+    <!-- </div> -->
+    <!-- Third Step -->
+    <!-- <div *ngSwitchCase="1000"> -->
+    <div id="step3" [hidden]="showDiv!=3">
+
+        <div class="control-group halfcontrol monthcontrol">
+          <label class='leftLabel' for="expiryMonth">Expiry Month</label>
+          <div class="righttoLabel">
+            <ng-select name="expiryMonth"
+              [options]="OPTIONS_MONTHS"
+              [(ngModel)]="formData.expiryMonth"
+              placeholder="Expiry Month"
+              #expiryMonth="ngModel" required
+              >
+            </ng-select>
+            <p class="red" [hidden]="expiryMonth.valid || (expiryMonth.untouched && !f.submitted)" *ngIf="expiryMonth.errors?.required">Expiry Month is required</p>
+        </div>
+        </div>
+
+
+
+
+        <div class="control-group halfcontrol monthcontrol">
+          <label class='leftLabel' for="expiryYear">Expiry Year</label>
+          <div class="righttoLabel">
+            <ng-select name="expiryYear"
+              [options]="OPTIONS_YEARS"
+              [(ngModel)]="formData.expiryYear"
+              placeholder="Expiry Year"
+              #expiryYear="ngModel" required
+              >
+            </ng-select>
+              <p class="red" [hidden]="expiryYear.valid || (expiryYear.untouched && !f.submitted)" *ngIf="expiryYear.errors?.required">Expiry Year is required</p>
+        </div>
+        </div>
+
+        <div class="control-group cardcontrol">
+          <label class='leftLabel' for="cardNumber">Card Number</label>
+          <input type="text" class="form-control" id="cardNumber" [(ngModel)]="formData.cardNumber" name="cardNumber" #card="ngModel" creditCard required>
+          <p class="red" [hidden]="card.valid || (card.untouched && !f.submitted)" *ngIf="card.errors?.required">Card Number is required.</p>
+          <p class="red" [hidden]="card.valid || (card.untouched && !f.submitted)" *ngIf="card.errors?.creditCard">Invalid Card Number.</p>
+        </div>
+
+        <div class="control-group cvccontrol">
+          <label class='leftLabel' for="cvc">CVC</label>
+          <input type="password" class="form-control" id="cvc" [(ngModel)]="formData.cvc" name="cvc" #cvc="ngModel" required [maxlength]="4">
+          <p class="red" [hidden]="cvc.valid || (cvc.untouched && !f.submitted)" *ngIf="cvc.errors?.required">CVC is required.</p>
+        </div>
+
+<div class="errorMessages" [hidden]="showValidations==false">
+<p class="red backred" [hidden]="jobref.valid || (jobref.untouched && !f.submitted)" *ngIf="jobref.errors?.required">Job Type is required</p>
+<p class="red backred" [hidden]="skill.valid || (skill.untouched && !f.submitted)" *ngIf="skill.errors?.required">Skill is required</p>
+<p class="red backred" [hidden]="level.valid || (level.untouched && !f.submitted)" *ngIf="level.errors?.required">Level is required</p>
+<p class="red backred" [hidden]="compensation.valid || (compensation.untouched && !f.submitted)" *ngIf="compensation.errors?.required">Compensation is required</p>
+<p class="red backred" [hidden]="companyType.valid || (companyType.untouched && !f.submitted)" *ngIf="companyType.errors?.required">Company Type is required</p>
+<p class="red backred" [hidden]="jobtitle.valid || (jobtitle.untouched && !f.submitted)" *ngIf="jobtitle.errors?.required">Job Title is required</p>
+<p class="red backred" [hidden]="location.valid || (location.untouched && !f.submitted)" *ngIf="location.errors?.required">Location is required</p>
+<p class="red backred" [hidden]="desc.valid || (desc.untouched && !f.submitted)" *ngIf="desc.errors?.required">Description is required</p>
+<p class="red backred" [hidden]="companyName.valid || (companyName.untouched && !f.submitted)" *ngIf="companyName.errors?.required">Company Name is required</p>
+<p class="red backred" [hidden]="companyUrl.valid || (companyUrl.untouched && !f.submitted)" *ngIf="companyUrl.errors?.required">Company Url is required</p>
+<p class="red backred" [hidden]="companyUrl.valid || (companyUrl.untouched && !f.submitted)" *ngIf="companyUrl.errors?.url">Please enter Url</p>
+<p class="red backred" [hidden]="elevator.valid || (elevator.untouched && !f.submitted)" *ngIf="elevator.errors?.required">Elevator pitch is required.</p>
+<p class="red backred" [hidden]="fn.valid || (fn.untouched && !f.submitted)" *ngIf="fn.errors?.required">First name is required.</p>
+<p class="red backred" [hidden]="ln.valid || (ln.untouched && !f.submitted)" *ngIf="ln.errors?.required">Last name is required.</p>
+<p class="red backred" [hidden]="email.valid || (email.untouched && !f.submitted)" *ngIf="email.errors?.required">Email is required.</p>
+<p class="red backred" [hidden]="email.valid || (email.untouched && !f.submitted)" *ngIf="email.errors?.email">Not an Email address.</p>
+<p class="red backred" [hidden]="addrline1.valid || (addrline1.untouched && !f.submitted)" *ngIf="addrline1.errors?.required">Address is required.</p>
+<p class="red backred" [hidden]="city.valid || (city.untouched && !f.submitted)" *ngIf="city.errors?.required">City is required.</p>
+<p class="red backred" [hidden]="zip.valid || (zip.untouched && !f.submitted)" *ngIf="zip.errors?.required">Zip is required.</p>
+<p class="red backred" [hidden]="phone.valid || (phone.untouched && !f.submitted)" *ngIf="phone.errors?.required">Phone is required.</p>
+<p class="red backred" [hidden]="password.valid || (password.untouched && !f.submitted)" *ngIf="password.errors?.required">Password is required.</p>
+
+<p class="red backred" [hidden]="card.valid || (card.untouched && !f.submitted)" *ngIf="card.errors?.required">Card Number is required.</p>
+<p class="red backred" [hidden]="card.valid || (card.untouched && !f.submitted)" *ngIf="card.errors?.creditCard">Invalid Card Number.</p>
+<p class="red backred" [hidden]="cvc.valid || (cvc.untouched && !f.submitted)" *ngIf="cvc.errors?.required">CVC is required.</p>
+<p class="red backred" [hidden]="expiryMonth.valid || (expiryMonth.untouched && !f.submitted)" *ngIf="expiryMonth.errors?.required">Expiry Month is required</p>
+<p class="red backred" [hidden]="expiryYear.valid || (expiryYear.untouched && !f.submitted)" *ngIf="expiryYear.errors?.required">Expiry Year is required</p>
+</div>
+
+
+
+<div class="pull-right subButton">
+  <button [disabled]="showloading==true"  style="margin:20px 0;" class="btn btn-success">Confirm and Register</button></div>
+  <div *ngIf="showloading==true" class="loadingAnimateDiv"><img class="loadingAnimateImg" src="/assets/images/loadingSmall.gif"></div>
+<div class="clearfix"></div>
+      </div>
+    <!-- </div> -->
+  <!-- </div> -->
+  <div class="buttonsC pull-left" [hidden]="showDiv==1">
+    <a (click)="decrementStep(f,$event)">&larr; Previous Step</a>
+  </div>
+
+  <div class="buttonsC pull-left" [hidden]="showDiv==3">
+  <a  (click)="incrementStep(f,$event)">Next Step &rarr;</a>
+  </div>
+
+</form>
+</div>
+</div>
+<div class="col-md-4 rightSidePostJob">
+
+<div class="sidebarOuter">
+<h4>USED BY</h4>
+<div class="imgColumn">
+<img class="imgSidebar sealImg" src="assets/images/seal.v1485536799.png">
+<h4>100% money-back guaranteed.</h4>
+<p>If you’re not 100% satisfied with the results from your listing, request a free reposting or a full refund within 30 days after your listing goes live. <a href="/guarantee" target="_blank">No&nbsp;hassle</a>.</p>
+</div>
+<div class="imgColumn">
+<img class="imgSidebar" src="assets/images/discount.v1485536799.jpg">
+<h4>Volume discount: up to 35% off.</h4>
+<p>Save 25&ndash;35% off retail pricing by purchasing job listing credits in advance. Credits never expire. <a href="/pricing#volume-discount" target="_blank">Details and sample pricing</a>.</p>
+</div>
+<div class="imgColumn">
+<img class="imgSidebar" src="assets/images/invoicing.v1485536799.png">
+<h4>Invoicing? No problem.</h4>
+<p>If you’d prefer to be invoiced and pay by check rather than by credit card, please <a href="/contact?subject=Invoicing" target="_blank">contact us</a> and we’ll be happy to set you up for invoicing. It’s quick and painless! Available only to U.S. customers at this&nbsp;time.</p>
+</div>
+<div class="imgColumn">
+
+<img class="imgSidebar" src="assets/images/backpack.v1485536799.png">
+<h4>Education &amp; non-profit rates.</h4>
+<p>We’re big fans of educational institutions and non-profit organizations. <a href="/contact?subject=Education/Non-Profit Discount" target="_blank">Contact us</a> for handsomely discounted&nbsp;rates.</p>
+</div>
+
+<div class="imgColumn">
+<img class="imgSidebar" src="assets/images/payment.v1485536799.png">
+<h4>Flexible payment options.</h4>
+<p>We accept all major credit cards and wire transfer. Your job will be live immediately after&nbsp;payment.</p>
+</div>
+
+<div class="imgColumn">
+<img class="imgSidebar" src="assets/images/company-info.v1485536799.png">
+</div>
+
+</div>
+</div>
+</div>

@@ -1,0 +1,41 @@
+<div class="viewjobscontainer">
+<div class="col-md-3">
+  <ul class="navigateDashUl">
+  <li class="dashboardli btn btn-white-fill navbar-btn"><a class="navlink" [routerLink]="['/dashboard/viewjobs']">View Jobs</a></li>
+  <li class="dashboardli btn btn-white-fill navbar-btn"><a class="navlink" [routerLink]="['/dashboard/editprofile']">Edit Profile</a></li>
+  <li class="dashboardli btn btn-white-fill navbar-btn"><a class="navlink" [routerLink]="['/dashboard/postjob']">Post Job</a></li>
+  <li *ngIf="userRole==1" class="dashboardli btn btn-white-fill navbar-btn"><a class="navlink" [routerLink]="['/dashboard/manage-users']">Manage Users</a></li>
+  <li class="dashboardli btn btn-white-fill navbar-btn"><a class="navlink" [routerLink]="['/logout']">Logout</a></li>
+
+  </ul>
+
+</div>
+<div class="col-md-9">
+  <div *ngIf="showloading==true" class="loadingAnimateDiv"><img class="loadingAnimateImg" src="/assets/images/loading.gif"></div>
+<div class="applicantsOuter">
+  <h3 class="editprofileh3 grey">Applications received for job</h3>
+  <div class="response-from-api">
+    <span style="color:red" [innerHTML]="error | returnerrorfromjson"> </span>
+  </div>
+  <ul class="applicantsUl">
+  <li  *ngFor="let applicant of applicants;let i=index">
+    <!-- <h4>Applicant No. {{ i + 1 }}</h4> -->
+    <div class="applicantrow"><label class="applicantlabel">Full Name</label><span>{{applicant.fullName}}</span></div>
+    <div class="applicantrow"><label class="applicantlabel">Email</label><span>{{applicant.email}}</span></div>
+    <div class="applicantrow"><label class="applicantlabel">Cover Letter</label>
+      <span [innerHTML]="applicant.coverLetter  | limitcharacters:20"></span>
+    </div>
+    <div class="applicantrow details">
+    <a class="applicantdetails" [routerLink]="['/dashboard/viewapplications/application',applicant.id]" routerLinkActive="active">Application Details</a>
+  </div>
+  </li>
+</ul>
+</div>
+
+<div class="applicantsOuter" *ngIf="!applicants">
+<p class="red">No Applications found for this job</p>
+</div>
+
+
+</div>
+</div>

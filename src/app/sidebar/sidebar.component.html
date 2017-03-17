@@ -1,0 +1,10 @@
+<div class='leftSide'>
+  <div>
+    JOB CATEGORIES
+  </div>
+  <ul class='sidebarUl otherUl'>
+    <li *ngFor="let skill of skills;let i = index" (click)='clickedSkills(i,$event)' [class.checked]="skill.done" >
+      <a [ngStyle]="{color:skill.color}" id="{{skill.id}}"
+       href="#">{{skill.title}}</a></li>
+  </ul>
+</div>

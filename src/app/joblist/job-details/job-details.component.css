@@ -1,0 +1,116 @@
+.jobInfo {
+  list-style: outside none none;
+  padding-left: 0 !important;
+  font-size: 12px;
+}
+.jobInfo > li {
+  float: left;
+  margin-right: 25px;
+}
+.postedOn {
+  float: left;
+margin-top: 19px;
+width: 100%;
+}
+.icon2x {
+  color: #888;
+  font-size: 22px;
+  margin-right: 3px;
+}
+.socialicons {
+  margin-top: 11px;
+}
+.jobTitleh3 {
+  color: #222;
+  font-size: 35px;
+  font-weight: 300;
+  margin-bottom: 18px;
+}
+.job-type {
+  border-radius: 14px;
+  color: #fff;
+  font-size: 12px;
+  padding: 4px 19px;
+  text-transform: uppercase;
+  width: 100px;
+}
+.Full.Time,.Free{
+    background-color: #e98210;
+}
+.All.inclusive,.Paid{
+    background-color: #fc00c1;
+}
+.Contract{
+  background-color:#0b71a2;
+}
+.Part-time{
+  background-color:#6946ff;
+}
+.Freelance{
+  background-color:#9aaa00;
+}
+.Internship{
+    background-color:#b65498;
+  }
+  .apply-to-job-button {
+    background-color: #31ace3;
+  border-radius: 4px;
+  font-size: 19px;
+  padding: 13px;
+  text-align: center;
+  text-transform: uppercase;
+  width: 100%;
+}
+.companyNameh5 {
+  color: #222;
+  font-weight: bold;
+  margin-bottom: 17px;
+  margin-top: 17px;
+}
+.small-apply-to-job-button{
+background-color: #31ace3;
+border-radius: 4px;
+font-size: 13px;
+padding: 13px;
+text-align: center;
+text-transform: uppercase;
+}
+.applyButton {
+  float: left;
+  margin-bottom: 27px;
+  margin-top: 27px;
+  text-align: center;
+  width: 100%;
+}
+  .applyButton {
+    float: left;
+    margin-bottom: 27px;
+    margin-top: 27px;
+    width: 100%;
+  }
+.jobdetails-outer-row {
+  margin: 0 auto;
+  width: 85%;
+  padding-top: 3%;
+}
+.jobDescription {
+  float: left;
+  margin-top: 29px;
+  width: 100%;
+}
+.jobLogo {
+  text-align: center;
+}
+.jobLogo img {
+  max-width: 45px;
+}
+
+.row.jobdetails-outer-row {
+  min-height: 400px;
+}
+.loadingAnimateDiv {
+  float: left;
+  margin-top: 9%;
+  text-align: center;
+  width: 99%;
+}

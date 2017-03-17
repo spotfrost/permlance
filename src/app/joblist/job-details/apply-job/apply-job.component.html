@@ -1,0 +1,102 @@
+<div class="container">
+
+<div class="row">
+
+<div class="formOuter">
+
+<a [routerLink]="['/jobs',jobId,jobTitle]" routerLinkActive="active"><i class="glyphicon glyphicon-arrow-left"></i> LISTING DETAILS</a>
+
+<div class="response-from-api">
+  <span style="color:green">{{result}}</span>
+  <span style="color:red"> {{error | returnerrorfromjson}}</span>
+</div>
+
+
+<form novalidate class="form-horizontal" (ngSubmit)="applyJob(f)" #f="ngForm">
+  <div class="control-group apply-job-controls">
+    <label class='fullLabel' for="coverLetter">Cover Letter</label>
+    <div class="belowLabel">
+      <textarea name="coverLetter" [(ngModel)]="formData.coverLetter" #coverLetter="ngModel" required rows="15" cols="100"></textarea>
+        <p class="red" [hidden]="coverLetter.valid || (coverLetter.untouched && !f.submitted)" *ngIf="coverLetter.errors?.required">Cover Letter is required</p>
+  </div>
+  </div>
+
+  <div class="control-group apply-job-controls">
+    <label class='fullLabel' for="fullName">Full Name</label>
+    <div class="belowLabel">
+    <input type="text" class="form-control" id="fullName" [(ngModel)]="formData.fullName" name="fullName" #fullName="ngModel" required [minlength]="5" [maxlength]="100">
+    <p class="red" [hidden]="fullName.valid || (fullName.untouched && !f.submitted)" *ngIf="fullName.errors?.required">Full Name is required</p>
+    <p class="red" [hidden]="fullName.valid || (fullName.untouched && !f.submitted)" *ngIf="fullName.errors?.minlength">Minimum length is 5 characters</p>
+  </div>
+  </div>
+
+  <div class="control-group apply-job-controls">
+    <label class='fullLabel' for="email">Email</label>
+    <div class="belowLabel">
+    <input type="text" class="form-control" id="email" [(ngModel)]="formData.email" name="email" #email="ngModel" required email [minlength]="5" [maxlength]="150">
+      <p class="red" [hidden]="email.valid || (email.untouched && !f.submitted)" *ngIf="email.errors?.required">Email is required.</p>
+      <p class="red" [hidden]="email.valid || (email.untouched && !f.submitted)" *ngIf="email.errors?.email">Not an Email address.</p>
+      <p class="red" [hidden]="email.valid || (email.untouched && !f.submitted)" *ngIf="email.errors?.minlength">Minimum length is 5 characters</p>
+  </div>
+  </div>
+
+  <div class="control-group apply-job-controls">
+    <label class='leftLabel' for="authenticProsUsername">Authentic Pros Username (optional)</label>
+    <div class="righttoLabel">
+    <input type="text" class="form-control" id="authenticProsUsername"  [(ngModel)]="formData.authenticProsUsername" name="authenticProsUsername" #apu="ngModel">
+  </div>
+  </div>
+
+  <div class="control-group apply-job-controls">
+    <label class='fullLabel' for="authenticProsUsername">Video Chat ID (optional)</label>
+    <div class="belowLabel socialDiv">
+
+      <div class="social-control">
+      <label class="leftLabel">Skype:</label><input type="text" class="form-control" id="skype"  [(ngModel)]="formData.skype" name="skype" #skype="ngModel">
+      </div>
+
+      <div class="social-control">
+
+    <label>Hangouts:</label><input type="text" class="form-control" id="hangouts"  [(ngModel)]="formData.hangouts" name="hangouts" #hangouts="ngModel">
+  </div>
+    </div>
+  </div>
+
+  <div class="control-group apply-job-controls">
+    <label class='leftLabel' for="location">Location</label>
+    <div class="righttoLabel">
+    <input type="text" class="form-control" id="location"  [(ngModel)]="formData.location" name="location" #locat="ngModel" required>
+    <p class="red" [hidden]="locat.valid || (locat.untouched && !f.submitted)" *ngIf="locat.errors?.required">Location is required</p>
+  </div>
+  </div>
+
+  <div class="control-group apply-job-controls">
+    <label class='leftLabel' for="twitter">Twitter Username (optional)</label>
+    <div class="righttoLabel">
+    <input type="text" class="form-control" id="twitter"  [(ngModel)]="formData.twitter" name="twitter" #twitter="ngModel">
+  </div>
+  </div>
+
+  <div class="control-group apply-job-controls">
+    <label class='fullLabel' for="websites">Websites</label>
+    <div class="belowLabel">
+      <textarea name="websites" [(ngModel)]="formData.websites" #websites="ngModel" rows="2" cols="100" required url></textarea>
+        <p class="red" [hidden]="websites.valid || (websites.untouched && !f.submitted)" *ngIf="websites.errors?.required">Websites is required</p>
+        <p class="red" [hidden]="websites.valid || (websites.untouched && !f.submitted)" *ngIf="websites.errors?.url">Not a valid url</p>
+  </div>
+  </div>
+
+  <div class="control-group apply-job-controls">
+      <label class='leftLabel' for="terms">Attachments (optional)</label>
+      <div class="righttoLabel">
+        <input type="file" name="image"  (change)="handleInputChange($event)" multiple>
+      </div>
+  </div>
+  <button [disabled]="showloading==true" style="margin:20px 0;" class="btn btn-success">Apply to Job</button>
+  <div *ngIf="showloading==true" class="loadingAnimateDiv"><img class="loadingAnimateImg" src="/assets/images/loadingSmall.gif"></div>
+</form>
+
+</div>
+
+</div>
+</div>

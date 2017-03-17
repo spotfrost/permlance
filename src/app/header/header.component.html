@@ -1,0 +1,55 @@
+<div class="navbar navbar-custom sticky" role="navigation" id="sticky-nav">
+    <div class="container">
+
+        <!-- Navbar-header -->
+        <div class="navbar-header">
+
+            <!-- Responsive menu button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+            <!-- LOGO -->
+            <a class="navbar-brand logo" [routerLink]="['']">
+                permlance
+            </a>
+
+        </div>
+        <!-- end navbar-header -->
+
+        <!-- menu -->
+        <div class="navbar-collapse collapse" id="navbar-menu">
+
+            <!-- Navbar left -->
+            <ul class="nav navbar-nav nav-custom-left">
+            </ul>
+            <!-- Navbar right -->
+            <ul class="nav navbar-nav navbar-right">
+                 <li>
+                    <a [routerLink]="['about']" class="nav-link">Job Alerts</a>
+                </li>
+                <li>
+                    <a [routerLink]="['contact']" class="nav-link">Contact</a>
+                </li>
+                <li class="loginbtnli">
+                    <a  [routerLink]="routerLink" class="login-btn nav-link btn navbar-btn">{{loginStatus}}</a>
+                </li>
+                <li>
+                    <a [routerLink]="['postajob']" routerLinkActive="active" class="btn btn-white-fill navbar-btn">Post a Job</a>
+                </li>
+                <li *ngIf="showDashboard==true">
+                    <a [routerLink]="['dashboard']" routerLinkActive="active" class="nav-link">Dashboard</a>
+                </li>
+                                
+
+
+            </ul>
+
+        </div>
+        <!--/Menu -->
+    </div>
+    <!-- end container -->
+</div>

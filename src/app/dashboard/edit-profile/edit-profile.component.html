@@ -1,0 +1,138 @@
+<div class="viewjobscontainer">
+<div class="col-md-3">
+<ul class="navigateDashUl">
+<li class="dashboardli btn btn-white-fill navbar-btn"><a class="navlink" [routerLink]="['/dashboard/viewjobs']">View Jobs</a></li>
+<li class="dashboardli btn btn-white-fill navbar-btn"><a class="navlink" [routerLink]="['/dashboard/editprofile']">Edit Profile</a></li>
+<li class="dashboardli btn btn-white-fill navbar-btn"><a class="navlink" [routerLink]="['/dashboard/postjob']">Post Job</a></li>
+<li *ngIf="userRole==1" class="dashboardli btn btn-white-fill navbar-btn"><a class="navlink" [routerLink]="['/dashboard/manage-users']">Manage Users</a></li>
+<li class="dashboardli btn btn-white-fill navbar-btn"><a class="navlink" [routerLink]="['/logout']">Logout</a></li>
+
+</ul>
+
+</div>
+<div class="col-md-9">
+
+  <div class="outerEditProfile">
+
+
+  <div class="response-from-api">
+    <span style="color:green">{{result}}</span>
+    <span style="color:red"> {{error}}</span>
+  </div>
+  <h3 class="editprofileh3 grey">My Profile</h3>
+
+  <form novalidate class="form-horizontal" (ngSubmit)="updateProfile(f)" #f="ngForm">
+  <div class="control-group">
+    <label class='leftLabel' for="firstName">First Name</label>
+    <div class="righttoLabel">
+    <input type="text" class="form-control" id="firstName" [(ngModel)]="userDetails.firstName" name="firstName" #fn="ngModel" required>
+    <p class="red" [hidden]="fn.valid || (fn.untouched && !f.submitted)" *ngIf="fn.errors?.required">First name is required.</p>
+  </div>
+  </div>
+
+  <div class="control-group">
+    <label class='leftLabel' for="lastName">Last Name</label>
+    <div class="righttoLabel">
+    <input type="text" class="form-control" id="lastName"  [(ngModel)]="userDetails.lastName" name="lastName" #ln="ngModel" required>
+    <p class="red" [hidden]="ln.valid || (ln.untouched && !f.submitted)" *ngIf="ln.errors?.required">Last name is required.</p>
+  </div>
+  </div>
+
+  <div class="control-group">
+    <label class='leftLabel' for="addressLine1">Address Line 1</label>
+    <div class="righttoLabel">
+    <input type="text" class="form-control" id="addressLine1" [(ngModel)]="userDetails.addressLine1" name="addressLine1" #addrline1="ngModel" required>
+    <p class="red" [hidden]="addrline1.valid || (addrline1.untouched && !f.submitted)" *ngIf="addrline1.errors?.required">Address is required.</p>
+  </div>
+  </div>
+
+  <div class="control-group">
+    <label class='leftLabel' for="addressLine2">Address Line 2</label>
+    <div class="righttoLabel">
+    <input type="text" class="form-control" id="addressLine2" [(ngModel)]="userDetails.addressLine2" name="addressLine2">
+  </div>
+  </div>
+
+  <div class="control-group">
+    <label class='leftLabel' for="city">City</label>
+    <div class="righttoLabel">
+    <input type="text" class="form-control" id="city" [(ngModel)]="userDetails.city" name="city" #city="ngModel" required>
+    <p class="red" [hidden]="city.valid || (city.untouched && !f.submitted)" *ngIf="city.errors?.required">City is required.</p>
+  </div>
+  </div>
+
+  <div class="control-group">
+    <label class='leftLabel' for="state">State</label>
+    <div class="righttoLabel">
+    <input type="text" class="form-control" id="state" [(ngModel)]="userDetails.state" name="state">
+  </div>
+  </div>
+
+  <div class="control-group">
+    <label class='leftLabel' for="zip">Zip</label>
+    <div class="righttoLabel">
+    <input type="text" class="form-control" id="zip" [(ngModel)]="userDetails.zip" name="zip" #zip="ngModel" required number>
+    <p class="red" [hidden]="zip.valid || (zip.untouched && !f.submitted)" *ngIf="zip.errors?.required">Zip is required.</p>
+    <p class="red" [hidden]="zip.valid || (zip.untouched && !f.submitted)" *ngIf="zip.errors?.number">Enter numbers only.</p>
+  </div>
+  </div>
+
+  <div class="control-group">
+    <label class='leftLabel' for="country">Country</label>
+    <div class="righttoLabel">
+    <input type="text" class="form-control" id="country" [(ngModel)]="userDetails.country" name="country">
+  </div>
+  </div>
+
+  <div class="control-group">
+    <label class='leftLabel' for="phone">Phone</label>
+    <div class="righttoLabel">
+    <input type="text" class="form-control" id="phone" [(ngModel)]="userDetails.phone" name="phone" #phone="ngModel" number [maxLength]="10">
+    <p class="red" [hidden]="phone.valid || (phone.untouched && !f.submitted)" *ngIf="phone.errors?.required">Phone is required.</p>
+    <p class="red" [hidden]="phone.valid || (phone.untouched && !f.submitted)" *ngIf="phone.errors?.number">Enter numbers only.</p>
+  </div>
+  </div>
+
+  <div class="control-group">
+    <label class='leftLabel' for="website">Website</label>
+    <div class="righttoLabel">
+    <input type="text" class="form-control" id="website" [(ngModel)]="userDetails.website" name="website" #website="ngModel" url>
+      <p class="red" [hidden]="website.valid || (website.untouched && !f.submitted)" *ngIf="website.errors?.url">Not a valid Url.</p>
+  </div>
+  </div>
+
+  <div class="control-group">
+    <label class='leftLabel' for="companyName">Company Name</label>
+    <div class="righttoLabel">
+    <input type="text" class="form-control" id="companyName" [(ngModel)]="userDetails.companyName" name="companyName">
+  </div>
+  </div>
+
+  <div class="control-group">
+      <label class='leftLabel' for="terms">Profile Photo (optional)</label>
+      <div class="righttoLabel">
+        <input type="file" name="image"  (change)="handleInputChange($event)">
+        <div class="alreadyPhoto" *ngIf="userDetails.profilePhoto">
+        <label>Photo in use</label>
+        <img [src]="userDetails.profilePhoto">
+        </div>
+      </div>
+  </div>
+
+  <div class="control-group">
+      <label class='leftLabel' for="terms">Hero Photo (optional)</label>
+      <div class="righttoLabel">
+        <input type="file" name="image"  (change)="handleInputChangeHeroPhoto($event)">
+        <div class="alreadyPhoto" *ngIf="userDetails.heroPhoto">
+        <label>Photo in use</label>
+        <img [src]="userDetails.heroPhoto">
+        </div>
+      </div>
+  </div>
+
+  <div class="pull-right">
+    <button  style="margin:20px 0;" class="btn btn-success">Update Profile</button></div>
+</form>
+  </div>
+  </div>
+  </div>

@@ -1,0 +1,49 @@
+.formOuter {
+  margin: 0 auto;
+  padding: 4% 0;
+  width: 70%;
+}
+label {
+  color: #222;
+  font-size: 16px;
+  font-weight: 300;
+  margin-bottom: 12px;
+}
+.belowLabel {
+  margin-bottom: 21px;
+}
+.socialDiv {
+  padding-left: 48px;
+}
+.socialDiv .leftLabel {
+  float: left;
+}
+.socialDiv .form-control {
+  float: left;
+}
+.social-control {
+  float: left;
+  margin-bottom: 19px;
+  width: 100%;
+}
+.socialDiv .leftLabel {
+  display: inline;
+  float: left !important;
+  width: 64px;
+}
+.socialDiv .form-control {
+  float: right !important;
+  width: 87%;
+}
+.apply-job-controls {
+  margin-bottom: 19px;
+}
+.btn.btn-success {
+  float: left;
+}
+.loadingAnimateDiv {
+  float: left;
+  margin-left: 14px;
+  margin-top: 12px;
+  width: 20%;
+}

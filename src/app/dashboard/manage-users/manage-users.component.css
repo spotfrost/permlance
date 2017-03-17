@@ -1,0 +1,44 @@
+.user-li img {
+  max-width: 110px;
+}
+.user-ull {
+  float: left;
+  list-style: outside none none;
+  padding-left: 0;
+  width: 100%;
+}
+
+.leftSideUser {
+  float: left;
+  width: 15%;
+}
+.rightSideUser {
+  float: right;
+  width: 85%;
+}
+.user-li {
+  background-color: #f0f0f0;
+  float: left;
+  padding: 14px;
+  width: 100%;
+}
+.userDetail {
+  margin-bottom: 9px;
+}
+.userLabel {
+  color: #222;
+  font-size: 14px;
+  font-weight: 500;
+  width: 16%;
+}
+.viewjobsh3 {
+  text-align: center;
+}
+.mylistingsouter {
+  background: #f0f0f0 none repeat scroll 0 0;
+  float: left;
+  width: 100%;
+}
+.user-li.userhightlighted {
+  background-color: #fff;
+}

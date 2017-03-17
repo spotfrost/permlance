@@ -1,0 +1,60 @@
+.job-listing-ul {
+  background-color: #f0f0f0;
+  margin-bottom: 21px;
+  padding: 12px;
+}
+.job-listing-li .details {
+  clear: none;
+  float: left;
+  width: 74%;
+}
+.job-listing-li .etc {
+  clear: none;
+  float: left;
+  padding-left: 0 !important;
+  text-align: left;
+  width: 16%;
+}
+.job-listing-li h3 {
+  font-size: 20px;
+  margin-top: 0 !important;
+}
+.job-listing-li {
+  margin-bottom: 26px;
+}
+
+.viewapplidiv {
+  margin-bottom: 9px;
+  margin-top: 9px;
+}
+.mylistingsouter {
+  background-color: #f0f0f0;
+  float: left;
+  width: 100%;
+}
+.viewjobsh3.grey {
+  border-bottom: 1px solid #bebebe;
+  margin: 18px;
+  padding-bottom: 9px;
+  text-align: center;
+}
+.loadingAnimateDiv {
+  left: 40%;
+  position: absolute;
+  top: 10%;
+}
+
+.job-listing-li.myhightlighted {
+  background-color: #fff;
+}
+.job-listing-li {
+  border-bottom: 1px solid #e3e1e2;
+  float: left;
+  padding: 14px 7px;
+  width: 100%;
+  margin-bottom: 0px !important;
+}
+
+.response-from-api {
+  margin-left: 19px;
+}

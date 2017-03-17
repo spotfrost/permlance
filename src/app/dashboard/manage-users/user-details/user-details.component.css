@@ -1,0 +1,30 @@
+.outerEditProfile {
+  background-color: #f0f0f0;
+  float: left;
+  padding: 26px;
+  width: 100%;
+}
+
+.leftLabel {
+  float: left;
+  width: 18%;
+}
+.righttoLabel {
+  float: right;
+  width: 79%;
+}
+.control-group {
+  float: left;
+  margin-bottom: 20px;
+  width: 98%;
+}
+.alreadyPhoto img {
+  border: 1px solid;
+  margin-left: 23px;
+  max-width: 50px;
+  padding: 5px;
+}
+.alreadyPhoto > label {
+  color: #222;
+  font-weight: 300;
+}

@@ -1,0 +1,46 @@
+.applicantsUl > li {
+  border: 1px solid #bdbdbd;
+  float: left;
+  margin: 21px;
+  padding: 15px;
+  width: 91%;
+  list-style: outside none none;
+}
+
+.applicantdetails {
+  background-color: #2f3e47 !important;
+  border-radius: 4px;
+  color: #fff;
+  padding: 5px 10px;
+}
+.response-from-api {
+  font-size: 17px;
+  margin-left: 20px;
+}
+.applicantsOuter {
+  background-color: #f0f0f0;
+  float: left;
+  width: 100%;
+  padding-top: 14px;
+}
+.applicantsUl h4 {
+  text-align: center;
+}
+.applicantlabel {
+  width: 39%;
+}
+.applicantrow{
+  padding: 4px;
+}.applicantrow > span {
+  width: 60%;
+}
+
+.applicantrow.details {
+  text-align: right;
+}
+
+.loadingAnimateDiv {
+  left: 42%;
+  position: absolute;
+  top: 20%;
+}

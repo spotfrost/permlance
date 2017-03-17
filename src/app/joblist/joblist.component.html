@@ -1,0 +1,46 @@
+<app-sidebar></app-sidebar>
+
+<div class="input-group">
+<!-- <form class="form-horizontal" (ngSubmit)="searchByKeyword(f,$event)" #f="ngForm"> -->
+  <input type="text" class="form-control search-jobs-input" placeholder="Search Jobs, Locations etc." aria-describedby="basic-addon2" name="keyword" ngModel (keyup)=searchByKeyword($event)>
+  <span class="input-group-addon" id="basic-addon2"><fa name="search" class="searchicnon"></fa></span>
+<!-- </form> -->
+</div>
+
+<div class='rightSide'>
+
+   <div *ngIf="showloading==true" class="loadingAnimateDiv"><img class="loadingAnimateImg" src="/assets/images/loading.gif"></div>
+   <div class="response-from-api">
+     <span style="color:red" [innerHTML]="error | returnerrorfromjson"> </span>
+   </div>
+
+
+<ul *ngIf="showloading==false" [ngClass]="{'job-listing-ul': true}">
+<li *ngFor="let item of  items | paginate: { itemsPerPage: 10, currentPage: p };let i=index;" [ngClass]="{'job-listing-li': true}" (mouseover)="highlightJob(i,$event)" [class.hightlighted]="i==selectedIndex"  >
+
+<a class="listing" [routerLink]="['/jobs',item.id,item.jobTitle | removeSpacesWithHyphens]" routerLinkActive="active">
+
+<img class="company-avatar" src="{{item.profilePhoto}}" (error)="item.profilePhoto=defaultImgSrc" >
+<div class="details">
+	<h3> {{item.jobTitle}}</h3>
+	<span title="We provide unique, compelling, creative design solutions" [innerHTML]="item.description | limitcharacters:120">...</span>
+	<span>{{item.skills}} {{item.typeName}}</span>
+</div>
+<ul class="etc">
+<li class="type full-time">
+{{item.companyName}}
+</li>
+<li class="location">{{item.location}}</li>
+<!-- <li class="contactEmail">{{item.contactEmail}}</li> -->
+<li style="display: none;">
+<span class="new">New</span>
+</li>
+</ul>
+</a>
+</li>
+</ul>
+<div class="pagination" *ngIf="error!=''">
+
+<pagination-controls *ngIf="showloading==false && showPagination==true" (pageChange)="p = $event"></pagination-controls>
+</div>
+ </div>

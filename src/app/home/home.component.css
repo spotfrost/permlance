@@ -1,0 +1,33 @@
+body {
+  color: #fff;
+  font-family: "Roboto",sans-serif;
+  font-size: 14px;
+  line-height: 22px;
+  overflow-x: hidden;
+}
+
+.home-header {
+  background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)), rgba(0,0,0,0.55) url('assets/images/bg.jpg') no-repeat center;
+  height: 340px;
+  padding: 30px 12px 3%;
+  text-align: center;
+  width: 100% !important;
+}
+
+h2 {
+  color:#fff;
+  font-size: 45px;
+  padding-bottom: 20px;
+}
+
+h4 {
+  color:#fff;
+  padding-bottom: 20px;
+}
+
+.btn-white-bordered {
+  margin-right: 10px;
+}
+.btn-white-fill {
+  margin-right: 10px;
+}

@@ -1,0 +1,35 @@
+<div class="login">
+    <div class="login-screen">
+          <div class="app-title">
+              <h2>Welcome Back!</h2>
+              <h4>Login to your account</h4>
+          </div>
+          <div class="response-from-api">
+            <span style="color:green">{{result}}</span>
+            <span *ngIf="error" class="errrospan" style="color:red"> {{error | returnerrorfromjson}}</span>
+          </div>
+          <form novalidate class="form-horizontal" (ngSubmit)="login(form,$event)" #form="ngForm">
+          <div class="login-form">
+              <div class="control-group">
+                <label class="loginLabel">Email</label>
+              <input type="text" class="form-control loginInput" id="email" [(ngModel)]="formData.email" name="email" #email="ngModel" required email placeholder="email" >
+              <p class="red" [hidden]="email.valid || (email.untouched && !form.submitted)" *ngIf="email.errors?.required">Email is required</p>
+                <p class="red" [hidden]="email.valid || (email.untouched && !form.submitted)" *ngIf="email.errors?.email">Not an email address</p>
+              <label class="login-field-icon fui-user" for="login-name"></label>
+              </div>
+              <div class="control-group">
+                <label class="loginLabel">Password</label>
+              <input type="password" class="form-control  loginInput" id="password" [(ngModel)]="formData.password" name="password" #password="ngModel" required  placeholder="password">
+                <p class="red" [hidden]="password.valid || (password.untouched && !form.submitted)" *ngIf="password.errors?.required">Password is required</p>
+              <label class="login-field-icon fui-lock" for="login-pass"></label>
+              </div>
+              <button  [disabled]="showloading==true"  class="btn login-btn" href="#">Sign In</button>
+
+              <p class="forgotp"><a class="forgotpass" [routerLink]="['/forgot-password']">Forgot Password?</a></p>
+
+                <div *ngIf="showloading==true" class="loadingAnimateDiv"><img class="loadingAnimateImg" src="/assets/images/loadingSmall.gif"></div>
+          </div>
+        </form>
+    </div>
+    <p class="column four center clear-after">Need to create an account? Just <a [routerLink]="['/postajob']">post a job</a> and you'll<br> automatically create one.</p>
+</div>

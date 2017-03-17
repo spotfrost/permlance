@@ -1,0 +1,57 @@
+<div class="viewjobscontainer">
+<div class="col-md-3">
+  <ul class="navigateDashUl">
+  <li class="dashboardli btn btn-white-fill navbar-btn"><a class="navlink" [routerLink]="['/dashboard/viewjobs']">View Jobs</a></li>
+  <li class="dashboardli btn btn-white-fill navbar-btn"><a class="navlink" [routerLink]="['/dashboard/editprofile']">Edit Profile</a></li>
+  <li class="dashboardli btn btn-white-fill navbar-btn"><a class="navlink" [routerLink]="['/dashboard/postjob']">Post Job</a></li>
+  <li *ngIf="userRole==1" class="dashboardli btn btn-white-fill navbar-btn"><a class="navlink" [routerLink]="['/dashboard/manage-users']">Manage Users</a></li>
+  <li class="dashboardli btn btn-white-fill navbar-btn"><a class="navlink" [routerLink]="['/logout']">Logout</a></li>
+
+  </ul>
+
+</div>
+<div class="col-md-9">
+  <div class="mylistingsouter">
+
+    <div *ngIf="showloading==true" class="loadingAnimateDiv"><img class="loadingAnimateImg" src="/assets/images/loading.gif"></div>
+
+
+  <h3 class="viewjobsh3 grey">My Job Listings</h3>
+  <div class="response-from-api">
+    <p class="red">{{error | returnerrorfromjson}}</p>
+  </div>
+
+  <ul [ngClass]="{'job-listing-ul': true}">
+  <li [ngClass]="{'job-listing-li': true}" *ngFor="let item of items  | paginate: { itemsPerPage: 10, currentPage: p };let i=index" (mouseover)="highlightJob(i,$event)" [class.myhightlighted]="i==selectedIndex">
+  <img class="company-avatar" src="{{item.profilePhoto}}" (error)="item.profilePhoto=defaultImgSrc" >
+  <div class="details">
+  <h3> {{item.jobTitle}}</h3>
+  <span [innerHTML]="item.description | limitcharacters:120">...</span>
+  </div>
+  <ul class="etc">
+  <li class="type full-time">
+  {{item.typeName}}
+  </li>
+  <li class="location">{{item.location}}</li>
+  <li style="display: none;">
+  <span class="new">New</span>
+  </li>
+  <li>
+  <div class="viewapplidiv">
+    <a class="viewapplications" [routerLink]="['/dashboard/viewapplicants',item.id,item.jobTitle | removeSpacesWithHyphens]" routerLinkActive="active">View Applications</a>
+</div>
+</li>
+  </ul>
+
+  <!-- </a> -->
+  </li>
+  </ul>
+  <pagination-controls *ngIf="showPagination==true" (pageChange)="p = $event"></pagination-controls>
+</div>
+
+
+
+
+
+</div>
+</div>

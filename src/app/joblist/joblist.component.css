@@ -1,0 +1,145 @@
+.search-jobs-text {
+  border: 1px solid #dcdcdc;
+  border-radius: 25px;
+  height: 34px;
+  padding: 8px;
+  width: 49%;
+}
+.search-jobs-inner {
+  margin: 0 auto;
+  width: 100%;
+}
+.search-jobs-inner .input-group {
+  width: 50%;
+}
+
+.wifi-icon {
+  float: left;
+  margin-left: 5px;
+  margin-top: 2px;
+}
+
+.response-from-api {
+  font-size: 15px;
+  margin-left: 20px;
+  margin-top: 20px;
+}
+.near-by {
+  border: 1px solid #bdbdbd;
+  float: right;
+  padding: 6px;
+}
+.nearbyspan {
+  font-size: 13px;
+  font-weight: 600;
+  margin-left: 2px;
+}
+
+.rightSide {
+  background-color: #ffffff;
+  box-shadow: 0 1px 2px 1px rgba(189, 198, 207, 0.41);
+  float: right;
+  margin-right: 5%;
+  margin-top: 2%;
+  width: 68%;
+}
+
+.loadingAnimateDiv {
+  left: 10%;
+margin: 0 auto;
+position: absolute;
+text-align: center;
+top: 55%;
+width: 100%;
+}
+
+
+.job-listing-li{
+  list-style: none;
+}
+
+.job-listing-li .details {
+  clear: none;
+  float: left;
+  width: 70%;
+}
+
+.job-listing-li a.listing {
+  background: #fff none repeat scroll 0 0;
+  display: block;
+  padding: 20px;
+  transition: background 0s ease 0s, all 0.05s ease 0s, ease-in-out 0.15s ease-in-out 0s;
+}
+
+.job-listing-li h4 {
+  color: #222;
+  font-size: 0.875em;
+  font-weight: 500;
+  position: relative;
+  top: 0.5em;
+}
+
+.job-listing-li .etc {
+  clear: none;
+  float: left;
+  text-align: left;
+  width: 20%;
+}
+.job-listing-li .company-avatar {
+  display: block;
+  float: left;
+  height: auto;
+  margin-right: 2%;
+  max-width: 50px;
+  width: 8%;
+  border-radius: 10px;
+}
+
+.job-listing-li h3 {
+  color: #31ace3;
+  font-family: freight-text-pro,serif;
+  font-size: 1.625em;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.job-listing-li {
+  float: left;
+  width: 100%;
+  border-bottom: 1px solid #e3e1e2;
+  /*padding-bottom: 8px;*/
+}
+
+.job-listing-ul {
+  float: left;
+  padding-left: 0;
+  width: 100%;
+}
+.etc li {
+  list-style: outside none none;
+}
+.etc {
+  clear: none;
+  float: right !important;
+  text-align: right !important;
+  width: 20%;
+}
+.listing {
+  float: left;
+  width: 100%;
+  padding: 14px !important;
+}
+
+
+.type {
+  color: #e98210;
+}
+
+.details > h3 {
+  margin-bottom: 0 !important;
+  margin-top: 0px !important;
+  font-family: inherit ;
+  font-weight: 300;
+  font-size: 21px;
+  color: #000;
+}

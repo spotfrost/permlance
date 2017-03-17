@@ -1,0 +1,142 @@
+.panel.card {
+  border: 0 none !important;
+}
+.sidebarUl > li {
+  list-style: outside none none;
+margin-bottom: 4px;
+}
+.glyphicon {
+  display: inline-block;
+  font-size: 15px;
+  font-style: normal;
+  line-height: 1;
+  position: relative;
+  top: 1px;
+  font-family: none !important;
+}
+.checked::before,.relocation::before,.visa::before {
+  border-radius: 51px;
+  content: "●";
+  font-size: 14px;
+}
+.jobtypeul .checked {
+color: #31ace3;
+}
+.otherUl .checked {
+  color: #888;
+}
+.sidebarUl a {
+  font-size: 12px;
+}
+
+.sidebarUl.otherUl a {
+  color: #222;
+}
+.all-jobs-label {
+  color: #888888;
+  float: left;
+  font-size: 14.4px;
+  font-weight: 500;
+  margin-left: 4px;
+  margin-right: 2px;
+  margin-top: 1px;
+}
+/* The switch - the box around the slider */
+.switch {
+  display: inline-block;
+float: left;
+height: 19px;
+margin-top: 2px;
+position: relative;
+width: 39px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {display:none;}
+
+/* The slider */
+.slider {
+ position: absolute;
+ cursor: pointer;
+ top: 0;
+ left: 0;
+ right: 0;
+ bottom: 0;
+ background-color: #31ace3;
+ -webkit-transition: .4s;
+ transition: .4s;
+}
+.leftSide {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+.slider:before {
+  background-color: white;
+bottom: 4px;
+content: "";
+height: 12px;
+left: 3px;
+position: absolute;
+transition: all 0.4s ease 0s;
+width: 12px;
+}
+
+input:checked + .slider {
+ background-color: #31ace3;
+}
+
+input:focus + .slider {
+ box-shadow: 0 0 1px #31ace3;
+}
+
+input:checked + .slider:before {
+ -webkit-transform: translateX(20px);
+ -ms-transform: translateX(20px);
+ transform: translateX(20px);
+}
+
+/* Rounded sliders */
+.slider.round {
+ border-radius: 34px;
+}
+
+.slider.round:before {
+ border-radius: 50%;
+}
+.switch-outer {
+  float: left;
+margin-top: 8px;
+width: 100%;
+}
+.col-md-3.leftSide {
+  padding-left: 6% !important;
+}
+
+.blue {
+  color: #31ace3;
+}
+.all-jobs-label.bold {
+  color: #222;
+}
+.leftSide {
+  float: left;
+  margin-left: 6%;
+  width: 20%;
+    margin-top: 2%;
+}
+
+
+
+.panel.card.panel-default {
+  border-bottom: 1px solid #dcdcdc !important;
+  border-left: 0 none;
+  border-right: 0 none;
+  border-top: 0 none;
+  box-shadow: 0 1px 2px 1px rgba(189, 198, 207, 0.41);
+  margin-bottom: 16px;
+}
+
+.panel-body.card-block {
+  background-color: #fff;
+}
